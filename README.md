@@ -37,7 +37,7 @@ $ npm run test:cov
 ## Suporte
 
 
-## Stay in touch
+## Desenvolvedores
 
 - Autor - [Victor Bentes](https://kamilmysliwiec.com)
 - Linkedin - [https://www.linkedin.com/in/victorbentes-dev/](https://www.linkedin.com/in/victorbentes-dev/)
