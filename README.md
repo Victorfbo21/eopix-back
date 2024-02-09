@@ -40,10 +40,10 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Victor Bentes](https://kamilmysliwiec.com)
+- Autor - [Victor Bentes](https://kamilmysliwiec.com)
 - Linkedin - [https://www.linkedin.com/in/victorbentes-dev/](https://www.linkedin.com/in/victorbentes-dev/)
 
-## License
+## Licença
 
 Licença MIT
 
