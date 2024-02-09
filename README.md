@@ -57,10 +57,9 @@ fornecido para fazê-lo, sujeito às seguintes condições:
 O aviso de direitos autorais acima e este aviso de permissão devem ser incluídos em todos
 cópias ou partes substanciais do Software.
 
-O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU
-IMPLÍCITA, INCLUINDO, MAS NÃO SE LIMITANDO A GARANTIAS DE COMERCIALIZAÇÃO,
-ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO E NÃO INFRAÇÃO. EM NENHUM CASO O
-AUTORES OU TITULARES DE DIREITOS AUTORAIS SÃO RESPONSÁVEIS POR QUALQUER RECLAMAÇÃO, DANOS OU OUTROS
-RESPONSABILIDADE, SEJA EM UMA AÇÃO DE CONTRATO, DELITO OU DE OUTRA FORMA, DECORRENTE DE,
-FORA OU EM CONEXÃO COM O SOFTWARE OU O USO OU OUTROS NEGÓCIOS NO
-SOFTWARE.
+O software é fornecido "como está", sem garantia de qualquer tipo, expressa ou
+implícita, incluindo, mas não se limitando a garantias de comercialização,
+adequação a um propósito específico e não infração. em nenhum caso o
+autores ou titulares de direitos autorais são responsáveis por qualquer reclamação, danos ou outros
+responsabilidade, seja em uma ação de contrato, delito ou de outra forma, decorrente de,
+fora ou em conexão com o software ou o uso ou outros negócios no software.
