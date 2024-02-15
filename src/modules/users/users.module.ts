@@ -12,4 +12,4 @@ import UsersServices from './users.service';
     providers: [UsersServices],
     exports: [UsersServices]
 })
-export class AppModule { }
+export class UsersModule { }

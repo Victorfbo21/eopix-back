@@ -3,8 +3,6 @@ import UsersServices from "./users.service";
 import { ICreateUserInterface } from "./interfaces/create-user.interface";
 
 
-
-
 @Controller('/users')
 export default class UsersController {
 

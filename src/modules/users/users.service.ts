@@ -2,29 +2,38 @@ import { Injectable } from "@nestjs/common";
 import UsersRepository from "./users.repository";
 import { ICreateUserInterface } from "./interfaces/create-user.interface";
 import { AppResponse } from "src/application/AppResponse";
+import { encodePassword } from "../../application/utils/encodePassword";
+import { InjectRepository } from "@nestjs/typeorm";
+import User from "./users.entity";
 
 @Injectable()
 export default class UsersServices {
 
-    constructor(private _usersRepository: UsersRepository) { }
+    constructor(@InjectRepository(User) private _usersRepository: UsersRepository) { }
 
 
     async createUser(user: ICreateUserInterface) {
-        try {
-            const verifyUserExists = await this._usersRepository.findOneBy({ email: user.email })
-            if (verifyUserExists) {
-                return new AppResponse({
-                    data: null,
-                    error: true,
-                    statusCode: 400,
-                    message: "Usuário ja Cadastrado"
-                })
-            }
-
-
+        const verifyUserExists = await this._usersRepository.findOneBy({ email: user.email })
+        if (verifyUserExists) {
+            return new AppResponse({
+                data: null,
+                error: true,
+                statusCode: 400,
+                message: "Usuário ja Cadastrado"
+            })
         }
-        catch (err) {
+        user.password = encodePassword(user.password)
 
-        }
+        const created = this._usersRepository.create(user)
+
+        const save = await this._usersRepository.save(created)
+
+
+        return new AppResponse({
+            data: save,
+            error: false,
+            statusCode: 201,
+            message: "Usuário Criado com Sucesso!"
+        })
     }
 }
