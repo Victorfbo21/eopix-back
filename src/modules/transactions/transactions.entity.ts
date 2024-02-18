@@ -2,6 +2,11 @@ import { Column, CreateDateColumn, Entity, Index, ManyToOne, PrimaryGeneratedCol
 import User from "../users/users.entity";
 
 
+enum TransactionStatus {
+    PENDING = 'pending',
+    FINISHED = 'finished',
+    CANCELED = 'canceled'
+}
 
 @Entity()
 export default class Transaction {
@@ -23,6 +28,12 @@ export default class Transaction {
     @Index()
     @Column()
     user_to: string;
+
+    @Column({
+        type: 'enum',
+        enum: TransactionStatus
+    })
+    status: string;
 
     @CreateDateColumn({ type: 'timestamp' })
     createdAt: Date;
