@@ -8,15 +8,28 @@ enum TransactionStatus {
     CANCELED = 'canceled'
 }
 
+enum TransactionType {
+    IN = 'IN',
+    OUT = 'OUT',
+}
+
 @Entity()
 export default class Transaction {
 
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
-    value: string;
+    @Column({
+        type: "float"
+    })
+    value: number;
 
+
+    @Column({
+        type: "enum",
+        enum: TransactionType
+    })
+    type: string;
 
     @ManyToOne(() => User)
     @Index()

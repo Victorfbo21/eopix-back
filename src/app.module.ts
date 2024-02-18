@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { UsersModule } from './modules/users/users.module';
+import { BalanceModule } from './modules/balance/balance.module';
+import { TransactionsModule } from './modules/transactions/transactions.module';
 
 @Module({
   imports: [
@@ -16,7 +18,9 @@ import { UsersModule } from './modules/users/users.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
     }),
-    UsersModule
+    UsersModule,
+    BalanceModule,
+    TransactionsModule
   ],
   controllers: [],
   providers: [],

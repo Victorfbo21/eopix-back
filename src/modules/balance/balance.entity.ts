@@ -9,8 +9,10 @@ export default class Balance {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
-    value: string;
+    @Column({
+        type: "float"
+    })
+    value: number;
 
     @ManyToOne(() => User)
     @Index()
