@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Post } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Patch, Post } from "@nestjs/common";
 import { TransactionsServices } from "./transactions.services";
 import { ICreateTransactionInterface } from "./interfaces/create-transaction.interface";
 
@@ -12,5 +12,15 @@ export class TransactionsController {
     @Post('/create')
     async createTransaction(@Body() data: ICreateTransactionInterface) {
         return this._transactionsServices.createTransaction(data)
+    }
+
+    @Get()
+    async transactionByUser() {
+
+    }
+
+    @Patch()
+    async updateTransactionStatus() {
+
     }
 }

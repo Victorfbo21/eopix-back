@@ -15,13 +15,15 @@ export class TransactionsServices {
 
 
     async createTransaction(data: ICreateTransactionInterface) {
-        try {
-            const createdTransaction = await this._transactionsRepository.create(data)
 
-            const savedTransaction = await this._transactionsRepository.save(createdTransaction)
+        const createdTransaction = await this._transactionsRepository.create(data)
 
-            if (!savedTransaction) {
-                return new AppResponse({
+        const savedTransaction = await this._transactionsRepository.save(createdTransaction)
+
+        // TODO - UPDATE BALANCE
+
+        if (!savedTransaction) {
+            return new AppResponse({
                     data: null,
                     error: true,
                     statusCode: 500,
@@ -36,15 +38,6 @@ export class TransactionsServices {
                 message: "Transação Salva com Sucesso!"
             })
 
-        }
-        catch (error) {
-            return new AppResponse({
-                data: error,
-                error: true,
-                statusCode: 500,
-                message: "erro"
-            })
-        }
     }
 
 }
