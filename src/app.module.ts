@@ -1,10 +1,14 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestMiddleware, NestModule, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { UsersModule } from './modules/users/users.module';
 import { BalanceModule } from './modules/balance/balance.module';
 import { TransactionsModule } from './modules/transactions/transactions.module';
 import { authMiddleware } from './application/middlewares/authMiddleware'
+import UsersController from './modules/users/users.controller';
+import { TransactionsController } from './modules/transactions/transactions.controller';
+import { BalanceController } from './modules/balance/balance.controller';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -21,13 +25,17 @@ import { authMiddleware } from './application/middlewares/authMiddleware'
     }),
     UsersModule,
     BalanceModule,
-    TransactionsModule
+    TransactionsModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(authMiddleware).exclude({ path: 'users', method: RequestMethod.ALL })
+    consumer.apply(authMiddleware)
+      .exclude({ path: 'users/create', method: RequestMethod.POST })
+      .forRoutes(UsersController, BalanceController, TransactionsController)
   }
+
 }
