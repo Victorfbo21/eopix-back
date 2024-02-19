@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { UsersModule } from './modules/users/users.module';
 import { BalanceModule } from './modules/balance/balance.module';
 import { TransactionsModule } from './modules/transactions/transactions.module';
+import { authMiddleware } from './application/middlewares/authMiddleware'
 
 @Module({
   imports: [
@@ -25,6 +26,8 @@ import { TransactionsModule } from './modules/transactions/transactions.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {
-
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(authMiddleware).exclude({ path: 'users', method: RequestMethod.ALL })
+  }
 }
