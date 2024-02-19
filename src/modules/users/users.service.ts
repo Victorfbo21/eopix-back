@@ -36,4 +36,24 @@ export default class UsersServices {
             message: "Usuário Criado com Sucesso!"
         })
     }
+
+    async getUsers() {
+
+        const usersFind = await this._usersRepository.find()
+
+        if (!usersFind) {
+            return new AppResponse({
+                data: null,
+                error: true,
+                statusCode: 500,
+                message: "Erro ao Encontrar Usuários!"
+            })
+        }
+        return new AppResponse({
+            data: usersFind,
+            error: false,
+            statusCode: 200,
+            message: "Usuários Encontrados com Sucesso!"
+        })
+    }
 }
