@@ -8,7 +8,7 @@ enum TransactionStatus {
     CANCELED = 'canceled'
 }
 
-enum TransactionType {
+export enum TransactionType {
     IN = 'IN',
     OUT = 'OUT',
 }
@@ -24,7 +24,6 @@ export default class Transaction {
     })
     value: number;
 
-
     @Column({
         type: "enum",
         enum: TransactionType
@@ -35,7 +34,6 @@ export default class Transaction {
     @Index()
     @Column()
     user_from: string;
-
 
     @ManyToOne(() => User)
     @Index()

@@ -20,7 +20,7 @@ export class TransactionsServices {
 
         const savedTransaction = await this._transactionsRepository.save(createdTransaction)
 
-        // TODO - UPDATE BALANCE
+
 
         if (!savedTransaction) {
             return new AppResponse({

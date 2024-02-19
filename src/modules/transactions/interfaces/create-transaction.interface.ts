@@ -3,4 +3,5 @@ export interface ICreateTransactionInterface {
     user_from: string;
     user_to: string;
     status: string;
+    type: string;
 }
