@@ -1,6 +1,8 @@
 
 import { NextFunction, Request, Response } from "express";
 import { JwtPayload } from "jsonwebtoken";
+import { UserTypeEnum } from '../../modules/users/users.entity'
+
 const jwt = require('jsonwebtoken')
 
 async function authMiddleware(
@@ -35,9 +37,11 @@ async function authMiddleware(
         const userId = decoded.userId
         const userType = decoded.type
 
-        // if (userType === 'user') {
-        //     return response.status(403).json({ data: null, error: true, statusCode: 403, message: "Forbidden" })
-        // }
+        const isValid = userType === UserTypeEnum.USER || userType === UserTypeEnum.ADMIN
+
+        if (!isValid) {
+            return response.status(403).json({ data: null, error: true, statusCode: 403, message: "Forbidden" })
+        }
 
         request.user = {
             id: userId,
