@@ -13,7 +13,12 @@ async function authMiddleware(
     const authHeader = request.headers.authorization;
 
     if (!authHeader) {
-        return response.status(401).json({ message: "Token missing" });
+        return response.status(401).json({ 
+            data : null,
+            error : true, 
+            statudCode : 401,
+            message: "Token missing" 
+        });
     }
 
     const tokenArray = authHeader.split(" ");

@@ -11,6 +11,7 @@ enum TransactionStatus {
 export enum TransactionType {
     IN = 'IN',
     OUT = 'OUT',
+    TRADE = 'TRADE'
 }
 
 @Entity()

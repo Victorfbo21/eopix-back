@@ -5,11 +5,16 @@ import { AppResponse } from "src/application/AppResponse";
 import { encodePassword } from "../../application/utils/encodePassword";
 import { InjectRepository } from "@nestjs/typeorm";
 import User from "./users.entity";
+import { BalanceServices } from "../balance/balance.service";
 
 @Injectable()
 export default class UsersServices {
 
-    constructor(@InjectRepository(User) private _usersRepository: UsersRepository) { }
+    constructor(
+        @InjectRepository(User) 
+        private _usersRepository: UsersRepository,
+        private _balanceService : BalanceServices
+        ) { }
 
 
     async createUser(user: ICreateUserInterface) {
@@ -28,6 +33,17 @@ export default class UsersServices {
 
         const save = await this._usersRepository.save(created)
 
+        const createBalance = await this._balanceService.createBalance(save.id)
+
+    
+        if(!createBalance){
+            return new AppResponse({
+                data : null,
+                error : true,
+                statusCode : 500,
+                message : 'Erro criar Carteira'
+            })
+        }
 
         return new AppResponse({
             data: save,

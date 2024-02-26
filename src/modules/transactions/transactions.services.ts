@@ -4,40 +4,51 @@ import Transaction from "./transactions.entity";
 import { TransactionsRepository } from "./transactions.repository";
 import { ICreateTransactionInterface } from "./interfaces/create-transaction.interface";
 import { AppResponse } from "src/application/AppResponse";
-
-
-
+import { BalanceServices } from "../balance/balance.service";
+import { ICreateDepositInterface } from "./interfaces/create-deposit.interface";
 
 @Injectable()
 export class TransactionsServices {
 
-    constructor(@InjectRepository(Transaction) private _transactionsRepository: TransactionsRepository) { }
+    constructor(
+        @InjectRepository(Transaction)
+        private _transactionsRepository: TransactionsRepository,
+        private _balanceServices: BalanceServices
+    ) { }
 
 
-    async createTransaction(data: ICreateTransactionInterface) {
+    async createTradeTransaction(data: ICreateTransactionInterface) {
 
-        const createdTransaction = await this._transactionsRepository.create(data)
+        const createdTransaction = this._transactionsRepository.create(data)
 
-        const savedTransaction = await this._transactionsRepository.save(createdTransaction)
+        await this._transactionsRepository.save(createdTransaction)
+
+        const toUpdate = {
+            value: data.value,
+            user_from: data.user_from,
+            user_to: data.user_to,
+            transaction_type: data.type
+        }
+
+        const applyTransaction = await this._balanceServices.applyTradeTransaction(toUpdate)
 
 
+        return applyTransaction
 
-        if (!savedTransaction) {
-            return new AppResponse({
-                    data: null,
-                    error: true,
-                    statusCode: 500,
-                    message: "Erro ao Salvar Transação!"
-                })
-            }
+    }
 
-            return new AppResponse({
-                data: savedTransaction,
-                error: false,
-                statusCode: 200,
-                message: "Transação Salva com Sucesso!"
-            })
 
+    async createDepositTransaction(data: ICreateDepositInterface) {
+        const createdTransaction = this._transactionsRepository.create(data)
+        await this._transactionsRepository.save(createdTransaction)
+
+
+        const applyTransaction = await this._balanceServices.applyDepositTransaction({
+            owner: data.user_to,
+            value: data.value
+        })
+
+        return applyTransaction
     }
 
 }

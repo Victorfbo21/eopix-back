@@ -44,7 +44,7 @@ export class AuthService {
 
         const requestTokenData = {
             userId: user.id,
-            type: 'user'
+            type: user.role
         }
 
         const genenateTokens = await this._tokenService.getToken(requestTokenData)

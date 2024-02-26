@@ -14,7 +14,7 @@ export default class TokenService {
     constructor() {
         this.secret = process.env.TOKEN_APP_SECRET || ""
         this.tokenLife = process.env.TOKEN_EXPIRATION
-        this.refreshTokenLife = process.env.TOKEN_EXPIRATION
+        this.refreshTokenLife = process.env.REFRESH_TOKEN_EXPIRATION
     }
 
     async getToken(tokenData: TokenRequestDto) {

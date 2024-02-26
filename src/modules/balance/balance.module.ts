@@ -7,7 +7,7 @@ import { BalanceServices } from './balance.service';
 import { UsersModule } from '../users/users.module';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Balance, BalanceRepository]), UsersModule],
+    imports: [TypeOrmModule.forFeature([Balance, BalanceRepository])],
     controllers: [BalanceController],
     providers: [BalanceServices],
     exports: [BalanceServices]
