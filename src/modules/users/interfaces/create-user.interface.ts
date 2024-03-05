@@ -4,5 +4,7 @@ export interface ICreateUserInterface {
     password: string 
 
 
+
+
     phone: string
 }
